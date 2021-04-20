@@ -1,0 +1,8 @@
+--- #this is first ansible file
+- hosts: demo
+  user: nodeuser
+  become: yes
+  connection: ssh
+  gather_facts: yes
+
+

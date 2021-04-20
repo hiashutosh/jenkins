@@ -1,0 +1,13 @@
+--- # handlers palybook
+- hosts: demo[1]
+  user: nodeuser
+  become: yes
+  connection: ssh
+  tasks:
+          - name: install apache and restart
+            action: yum name=httpd state=installed
+            notify: restart-httpd
+  handlers:
+          - name: restart-httpd
+            action: service name=httpd state=restarted
+
