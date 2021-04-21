@@ -1,8 +1,0 @@
---- # master playbook
-- hosts: demo
-  user: nodeuser
-  become: yes
-  connection: ssh
-  roles:
-          - role1
-                
