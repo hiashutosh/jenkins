@@ -3,7 +3,6 @@
   become: true
   gather_facts: false
   
-  host_key_checking: False
   tasks:
 
     - name: install docker 
