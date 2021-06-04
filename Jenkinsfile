@@ -38,12 +38,12 @@ pipeline {
             
             }
 
-            steps {
-                echo 'deploying the application.....'
-                script {
-                    gv.deploy()
-                }
-            }
+            //steps {
+             //   echo 'deploying the application.....'
+              //  script {
+               //     gv.deploy()
+                //}
+            //}
         }
     }
 
