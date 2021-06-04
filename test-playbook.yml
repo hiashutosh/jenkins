@@ -7,15 +7,15 @@
   tasks:
     - name: copy war file to node
       copy:
-        src: /home/ubuntu/docker/.war
+        src: /home/ubuntu/docker/*.war
         dest: /opt/
     - name: copy dockerfile
       copy:
-        src: /home/ubuntu/docker/*.war
+        src: /home/ubuntu/docker/Dockerfile
         dest: /opt/
 
     - name: Building docker image
-      shell: "cd /home/ubuntu/docker/"
+      shell: "cd /opt/"
       shell: "docker build -t yadavashu/test_img:$BUILD_ID ."
 
     - name: Run Docker container
