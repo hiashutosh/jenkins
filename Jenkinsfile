@@ -8,7 +8,7 @@ pipeline {
                 script {
                     gv = load "pipeline.groovy"
                     git 'https://github.com/hiashutosh/webapp.git'
-                    git 'https://github.com/hiashutosh/jenkins.git'
+                   
                 }
             }
         }
@@ -18,7 +18,8 @@ pipeline {
                 echo 'building the application....'
                 
                 script {
-                   gv.buildjar()
+                    git 'https://github.com/hiashutosh/jenkins.git'
+                    gv.buildjar()
                }
             }
         }
