@@ -18,7 +18,7 @@ pipeline {
                 echo 'building the application....'
                 
                 script {
-                    git 'https://github.com/hiashutosh/jenkins.git'
+                    
                     gv.buildjar()
                }
             }
