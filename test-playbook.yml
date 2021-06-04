@@ -2,7 +2,7 @@
 - hosts: all
   become: true
   connection: ssh
-  garther_facts: False
+  gather_facts: False
 
   tasks:
     - name: copy war file to node
