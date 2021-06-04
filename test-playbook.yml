@@ -7,7 +7,7 @@
   tasks:
     - name: copy war file to node
       copy:
-        src: /home/ubuntu/docker/*.war
+        src: /home/ubuntu/docker/mvnwebapp.war
         dest: /opt/
     - name: copy dockerfile
       copy:
