@@ -3,7 +3,7 @@ def gv
 pipeline {
     agent any 
     stages {
-        stage("initialization") {
+        stage("init") {
             steps {
                 script {
                     gv = load "pipeline.groovy"
