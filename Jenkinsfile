@@ -34,16 +34,17 @@ pipeline {
                 
                 script {
                     gv.buildimage()
+                    gv.deploy()
                 }
             
             }
 
-            steps("deploting") {
-               echo 'deploying the application.....'
-                script {
-                   gv.deploy()
-                }
-            }
+            //steps("deploting") {
+             //  echo 'deploying the application.....'
+              //  script {
+                   
+              //  }
+            //}
         }
     }
 
