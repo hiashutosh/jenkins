@@ -25,7 +25,7 @@ pipeline {
             steps {
                 echo 'testing the application.....'
                 echo 'copying war to ansible host...'
-                sshPublisher(publishers: [sshPublisherDesc(configName: 'docker', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '//opt//docker//', remoteDirectorySDF: false, removePrefix: '/pipeline test/target/', sourceFiles: './pipeline test/target/mvnwebapp.war')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+                sshPublisher(publishers: [sshPublisherDesc(configName: 'docker', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '//opt//', remoteDirectorySDF: false, removePrefix: '/pipeline test/target/', sourceFiles: './pipeline test/target/mvnwebapp.war')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
             }
         }
         stage("deploy") {

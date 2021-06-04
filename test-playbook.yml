@@ -6,7 +6,11 @@
   tasks:
     - name: copy war file to node
       copy:
-        src: /opt/docker/webapp.war
+        src: /opt/webapp.war
+        dest: /opt/
+    - name: copy dockerfile
+      copy:
+        src: /opt/webapp.war
         dest: /opt/
 
     - name: Building docker image
