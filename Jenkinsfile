@@ -24,27 +24,24 @@ pipeline {
         stage("test") {
             steps {
                 echo 'testing the application.....'
-                
+                echo 'copying war to ansible host...'
+                sshPublisher(publishers: [sshPublisherDesc(configName: 'docker', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '//opt//docker//', remoteDirectorySDF: false, removePrefix: '/pipeline test/target/', sourceFiles: './pipeline test/target/mvnwebapp.war')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
             }
         }
         stage("deploy") {
 
-            steps("build-image") {
-                echo 'Building docker image...'
+            steps {
                 
+                             
                 script {
+                    echo 'Building docker image...'
                     gv.buildimage()
+                    echo 'deploying docker image....'
                     gv.deploy()
                 }
             
             }
-
-            //steps("deploting") {
-             //  echo 'deploying the application.....'
-              //  script {
-                   
-              //  }
-            //}
+            
         }
     }
 
