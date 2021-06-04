@@ -27,11 +27,10 @@ pipeline {
             steps {
                 echo 'testing the application.....'
                 echo 'copying war to ansible host...'
-                
+             
             }
-
-
         }
+        
         stage("deploy") {
 
             steps {
