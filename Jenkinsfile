@@ -15,10 +15,10 @@ pipeline {
         stage("build-jar") {
             steps {
                 echo 'building the application....'
-                sh 'mvn package'
-               // script {
-               //     gv.buildjar()
-               // }
+                
+                script {
+                   gv.buildjar()
+               }
             }
         }
         stage("test") {
@@ -29,21 +29,21 @@ pipeline {
         }
         stage("deploy") {
 
-            steps {
+            steps("build-image") {
                 echo 'Building docker image...'
                 
-                //script {
-                //    gv.buildimage()
-                //}
+                script {
+                    gv.buildimage()
+                }
             
             }
 
-            //steps {
-             //   echo 'deploying the application.....'
-              //  script {
-               //     gv.deploy()
-                //}
-            //}
+            steps {
+               echo 'deploying the application.....'
+                script {
+                   gv.deploy()
+                }
+            }
         }
     }
 
