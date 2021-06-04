@@ -3,6 +3,7 @@
   become: true
   gather_facts: false
   ansible_password: "ashu1234"
+  host_key_checking: False
   tasks:
 
     - name: install docker 

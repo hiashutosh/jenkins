@@ -26,7 +26,7 @@ pipeline {
                 echo 'testing the application.....'
                 echo 'copying war to ansible host...'
                 sshPublisher(publishers: [sshPublisherDesc(configName: 'docker', transfers: [sshTransfer( remoteDirectory: '//home//ubuntu//docker//', removePrefix: 'target/', sourceFiles: 'target/mvnwebapp.war')])])
-                sshPublisher(publishers: [sshPublisherDesc(configName: 'docker', transfers: [sshTransfer( remoteDirectory: '//home//ubuntu//docker//', sourceFiles: 'https://raw.githubusercontent.com/hiashutosh/jenkins/master/Dockerfile')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])           
+                sshPublisher(publishers: [sshPublisherDesc(configName: 'docker', transfers: [sshTransfer( remoteDirectory: '//home//ubuntu//docker//', sourceFiles: 'Dockerfile test-playbook.yml setup.yml')])])           
                
             }
 

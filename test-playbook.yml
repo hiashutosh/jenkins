@@ -3,18 +3,19 @@
   become: true
   connection: ssh
   garther_facts: False
+  host_key_checking: False
   tasks:
     - name: copy war file to node
       copy:
-        src: /opt/webapp.war
+        src: /home/ubuntu/docker/.war
         dest: /opt/
     - name: copy dockerfile
       copy:
-        src: /opt/webapp.war
+        src: /home/ubuntu/docker/*.war
         dest: /opt/
 
     - name: Building docker image
-      shell: "cd /opt/"
+      shell: "cd /home/ubuntu/docker/"
       shell: "docker build -t yadavashu/test_img:$BUILD_ID ."
 
     - name: Run Docker container
