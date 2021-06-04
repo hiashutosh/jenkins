@@ -16,8 +16,8 @@
 
     - name: Building docker image
       shell: "cd /opt/"
-      shell: "docker build -t yadavashu/test_img:$BUILD_ID ."
+      shell: "sudo docker build -t yadavashu/test_img:$BUILD_ID ."
 
     - name: Run Docker container
-      shell: "docker run -td --name test-cont -p 80:80 yadavashu/test_img:$BUILD_ID"
+      shell: "sudo docker run -td --name test-cont -p 8080:8080 yadavashu/test_img:$BUILD_ID"
   
