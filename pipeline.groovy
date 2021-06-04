@@ -4,7 +4,7 @@ def buildjar() {
 
 def buildimage() {
     sh 'docker build -t yadavashu/demo:$BUILD_ID .'
-    sh 'docker push yadavashu/demo:$BUILD_ID'
+    //sh 'docker push yadavashu/demo:$BUILD_ID'
     
 }
 
