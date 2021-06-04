@@ -15,8 +15,7 @@
         dest: /opt/
 
     - name: Building docker image
-      shell: "cd /opt/"
-      shell: "sudo docker build -t yadavashu/test_img ."
+      shell: "cd /opt/ && sudo docker build -t yadavashu/test_img ."
 
     - name: Run Docker container
       shell: "sudo docker run -td --name test-cont -p 8080:8080 yadavashu/test_img"
