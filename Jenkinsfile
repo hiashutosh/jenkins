@@ -7,6 +7,7 @@ pipeline {
             steps {
                 script {
                     gv = load "pipeline.groovy"
+                    git 'https://github.com/hiashutosh/webapp.git'
                 }
             }
         }
