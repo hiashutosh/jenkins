@@ -1,9 +1,9 @@
 def buildjar() {
     sh 'mvn clean install package'
-    
+    sshPublisher(publishers: [sshPublisherDesc(configName: 'docker', transfers: [sshTransfer( execCommand: 'cd /home/ubuntu/docker/ ; rm -rf *')])])           
+   
     sshPublisher(publishers: [sshPublisherDesc(configName: 'docker', transfers: [sshTransfer( remoteDirectory: '//home//ubuntu//docker//', removePrefix: 'target/', sourceFiles: 'target/mvnwebapp.war')])])
-    sshPublisher(publishers: [sshPublisherDesc(configName: 'docker', transfers: [sshTransfer( remoteDirectory: '//home//ubuntu//docker//', sourceFiles: 'Dockerfile', execCommand: 'cd /home/ubuntu/docker/ ; rm -rf *')])])           
-              
+             
 }
 
 def buildimage() {
