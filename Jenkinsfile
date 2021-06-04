@@ -38,7 +38,7 @@ pipeline {
             
             }
 
-            steps {
+            steps("deploting") {
                echo 'deploying the application.....'
                 script {
                    gv.deploy()
