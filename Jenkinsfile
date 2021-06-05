@@ -3,7 +3,7 @@ def gv
 pipeline {
     agent any 
     triggers {
-        pollSCM '* * * * *'
+        pollSCM '3 * * * *'
     }
 
     stages {
