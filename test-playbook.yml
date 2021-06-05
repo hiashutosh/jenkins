@@ -9,14 +9,17 @@
       copy:
         src: /home/ubuntu/docker/mvnwebapp.war
         dest: /opt/
+        force: yes
     - name: copy dockerfile
       copy:
         src: /home/ubuntu/docker/Dockerfile
         dest: /opt/
+        force: yes
 
     - name: Building docker image
-    - shell: sudo su; docker rmi -f $(docker images -q); docker build -t yadavashu/test_img /opt/.
+      shell: docker rmi -f yadavashu/test_img; docker build -t yadavashu/test_img /opt/.
+      become: true
 
     - name: Run Docker container
-    - command: docker stop $(docker ps -a -q); docker rm $(docer ps -a -q); docker run -td --name test-cont -p 8080:8080 yadavashu/test_img
-  
+      shell: docker stop test-cont; docker rm test-cont; docker run -td --name test-cont -p 8080:8080 yadavashu/test_img
+      become: true
