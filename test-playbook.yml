@@ -15,10 +15,9 @@
         dest: /opt/
 
     - name: Building docker image
-      command: cd /opt/ 
       command: sudo su
       command: docker rmi -f $(docker images -q)
-      command: docker build -t yadavashu/test_img .
+      command: docker build -t yadavashu/test_img /home/ubuntu/.
 
     - name: Run Docker container
       command: docker stop $(docker ps -a -q)

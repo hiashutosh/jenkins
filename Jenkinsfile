@@ -2,6 +2,10 @@ def gv
 
 pipeline {
     agent any 
+    triggers {
+        pollSCM '* * * * *'
+    }
+
     stages {
         stage("init") {
             steps {
