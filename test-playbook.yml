@@ -18,7 +18,7 @@
         force: yes
 
     - name: Building docker image
-      shell: for (( i=0; i<{{ build_id }}; i++ )) do docker rmi -f yadavashu/{{ job_name_old }}:$i done; docker build -t yadavashu/{{ job_name }}:{{ build_id }} /opt/.
+      shell: docker rmi -f yadavashu/{{ job_name_old }}:{{ item }} done; docker build -t yadavashu/{{ job_name }}:{{ build_id }} /opt/.
       become: true
 
     - name: Run Docker container
