@@ -16,13 +16,13 @@
 
     - name: Building docker image
     - shell: |
-        sudo su
-        docker rmi -f $(docker images -q)
-        docker build -t yadavashu/test_img /opt/.
+      - sudo su
+      - docker rmi -f $(docker images -q)
+      - docker build -t yadavashu/test_img /opt/.
 
     - name: Run Docker container
     - command: |
-        docker stop $(docker ps -a -q)
-        docker rm $(docer ps -a -q)
-        docker run -td --name test-cont -p 8080:8080 yadavashu/test_img
+      - docker stop $(docker ps -a -q)
+      - docker rm $(docer ps -a -q)
+      - docker run -td --name test-cont -p 8080:8080 yadavashu/test_img
   
