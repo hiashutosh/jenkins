@@ -15,8 +15,12 @@
         dest: /opt/
 
     - name: Building docker image
-      shell: "cd /opt/ ;sudo su; docker rmi -f $(docker images -q) ; sudo docker build -t yadavashu/test_img ."
+      command: cd /opt/ 
+      command: sudo su
+      command: docker rmi -f $(docker images -q)
+      command: docker build -t yadavashu/test_img .
 
     - name: Run Docker container
-      shell: "sudo docker stop $(docker ps -a -q);  sudo docker run -td --name test-cont -p 8080:8080 yadavashu/test_img"
+      command: docker stop $(docker ps -a -q)
+      command: docker run -td --name test-cont -p 8080:8080 yadavashu/test_img
   
