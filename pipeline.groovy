@@ -12,19 +12,19 @@ def buildimage() {
     //sh 'docker build -t yadavashu/demo:$BUILD_ID .'
     //sh 'docker push yadavashu/demo:$BUILD_ID'
     sshPublisher(publishers: [sshPublisherDesc(configName: 'docker', transfers: [sshTransfer( execCommand: '''cat >> /home/ubuntu/docker/varsfile.yml << EOF
-    build_id: ${currentBuild.number}
+    build_id: $BUILD_ID
     job_name: $JOB_NAME
-    build_id_old:${currentBuild.previousBuild.getNumber()}
+    build_id_old:(${BUILD_ID}-1)
     job_name_old: $JOB_NAME
 EOF''')], verbose: true)])
     
     sshPublisher(publishers: [sshPublisherDesc(configName: 'docker', transfers: [sshTransfer( remoteDirectory: '//home//ubuntu//docker//', sourceFiles: 'setup.yml')], verbose:true)])
-    sshPublisher(publishers: [sshPublisherDesc(configName: 'docker', transfers: [sshTransfer( execCommand: '''cd /home/ubuntu/docker/ ; wget https://raw.githubusercontent.com/hiashutosh/jenkins/master/Dockerfile ; wget https://raw.githubusercontent.com/hiashutosh/jenkins/master/setup.yml; ansible-playbook -i 192.168.132.146, setup.yml --extra-vars "ansible_password=ashu1234"''')], verbose:true)])
+    sshPublisher(publishers: [sshPublisherDesc(configName: 'docker', transfers: [sshTransfer( execCommand: '''cd /home/ubuntu/docker/ ; wget https://raw.githubusercontent.com/hiashutosh/jenkins/version-deploy/Dockerfile ; wget https://raw.githubusercontent.com/hiashutosh/jenkins/version-deploy/setup.yml; ansible-playbook -i 192.168.132.146, setup.yml --extra-vars "ansible_password=ashu1234"''')], verbose:true)])
 }
 
 def deploy() {
     sshPublisher(publishers: [sshPublisherDesc(configName: 'docker', transfers: [sshTransfer( remoteDirectory: '//home//ubuntu//docker//', sourceFiles: 'test-playbook.yml')], verbose:true)])
-    sshPublisher(publishers: [sshPublisherDesc(configName: 'docker', transfers: [sshTransfer( execCommand: '''cd /home/ubuntu/docker/ ; wget https://raw.githubusercontent.com/hiashutosh/jenkins/master/test-playbook.yml ; ansible-playbook -i 192.168.132.146, test-playbook.yml --extra-vars "ansible_password=ashu1234"''')], verbose:true)])
+    sshPublisher(publishers: [sshPublisherDesc(configName: 'docker', transfers: [sshTransfer( execCommand: '''cd /home/ubuntu/docker/ ; wget https://raw.githubusercontent.com/hiashutosh/jenkins/version-deploy/test-playbook.yml ; ansible-playbook -i 192.168.132.146, test-playbook.yml --extra-vars "ansible_password=ashu1234"''')], verbose:true)])
 
 }
 
