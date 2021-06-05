@@ -18,7 +18,7 @@
         force: yes
 
     - name: Building docker image
-      shell: docker stop test-cont; docker rm test-cont; docker rmi -f yadavashu/{{ build_job }}:{{ item }}; docker build -t yadavashu/{{ job_name }}:{{ build_id }} /opt/.
+      shell: docker stop test-cont; docker rm test-cont; docker rmi -f yadavashu/{{ build_job }}:{{ version }}; docker build -t yadavashu/{{ job_name }}:{{ build_id }} /opt/.
       become: true
 
     - name: Run Docker container
