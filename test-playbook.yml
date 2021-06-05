@@ -21,7 +21,7 @@
       shell: docker stop test-cont; docker rm test-cont
       become: true
       ignore_errors: true
-      
+
     - name: remove previous image
       shell: docker rmi -f yadavashu/{{ job_name }}:{{ item }}
       loop: "{{ version }}"
@@ -36,5 +36,5 @@
       notify: run_container
 
     - name: run_container
-      shell: docker run -td --name test-cont -p 8080:8080 yadavashu/{{ job_name }}:{{ build_id }}
+      shell: docker run -td --name test-cont -p 8080:8080 yadavashu/{{ job_name }}:{{ build_id }} /bin/bash
       become: true
