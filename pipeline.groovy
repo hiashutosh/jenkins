@@ -15,7 +15,8 @@ def buildimage() {
     build_id: $BUILD_NUMBER
     job_name: test
     build_id_old: $(( $BUILD_NUMBER-1 ))
-    job_name_old: $JOB_NAME
+    job_name_old: test
+    item: list(range($BUILD_NUMBER))
 EOF''')], verbose: true)])
     
     sshPublisher(publishers: [sshPublisherDesc(configName: 'docker', transfers: [sshTransfer( remoteDirectory: '//home//ubuntu//docker//', sourceFiles: 'setup.yml')], verbose:true)])
