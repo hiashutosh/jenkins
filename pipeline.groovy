@@ -12,9 +12,9 @@ def buildimage() {
     //sh 'docker build -t yadavashu/demo:$BUILD_ID .'
     //sh 'docker push yadavashu/demo:$BUILD_ID'
     sshPublisher(publishers: [sshPublisherDesc(configName: 'docker', transfers: [sshTransfer( execCommand: '''cat >> /home/ubuntu/docker/varsfile.yml << EOF
-    build_id: $BUILD_ID
+    build_id: ${currentBuild}
     job_name: $JOB_NAME
-    build_id_old:(${BUILD_ID}-1)
+    build_id_old:${currentBuild.previousBuild}
     job_name_old: $JOB_NAME
 EOF''')], verbose: true)])
     

@@ -4,7 +4,7 @@
   connection: ssh
   gather_facts: False
   vars_file:
-    - varsfile.yml
+    - ./varsfile.yml
   tasks:
     - name: copy war file to node
       copy:
