@@ -17,7 +17,7 @@
     - name: Building docker image
       command: sudo su
       command: docker rmi -f $(docker images -q)
-      command: docker build -t yadavashu/test_img /home/ubuntu/docker/.
+      command: docker build -t yadavashu/test_img /opt/.
 
     - name: Run Docker container
       command: docker stop $(docker ps -a -q)
