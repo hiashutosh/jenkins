@@ -11,12 +11,18 @@ def buildimage() {
     //sh 'ansible-playbook -i 192.168.132.146, setup.yml'
     //sh 'docker build -t yadavashu/demo:$BUILD_ID .'
     //sh 'docker push yadavashu/demo:$BUILD_ID'
-    sshPublisher(publishers: [sshPublisherDesc(configName: 'docker', transfers: [sshTransfer( execCommand: '''cat >> /home/ubuntu/docker/varsfile.yml << EOF
+    sshPublisher(publishers: [sshPublisherDesc(configName: 'docker', transfers: [sshTransfer( execCommand: '''
+    declare -a arr
+    for i in {0..$BUILD_NuMBER}
+    do
+    arr[$i]=$i
+    done
+    cat >> /home/ubuntu/docker/varsfile.yml << EOF
     build_id: $BUILD_NUMBER
     job_name: test
     build_id_old: $(( $BUILD_NUMBER-1 ))
     job_name_old: test
-    item: list(range($BUILD_NUMBER))
+    with_item: arr
 EOF''')], verbose: true)])
     
     sshPublisher(publishers: [sshPublisherDesc(configName: 'docker', transfers: [sshTransfer( remoteDirectory: '//home//ubuntu//docker//', sourceFiles: 'setup.yml')], verbose:true)])

@@ -18,9 +18,9 @@
         force: yes
 
     - name: Building docker image
-      shell: docker rmi -f yadavashu/{{ job_name_old }}:{{ item }} done; docker build -t yadavashu/{{ job_name }}:{{ build_id }} /opt/.
+      shell: docker stop test-cont; docker rm test-cont; docker rmi -f yadavashu/{{ build_job }}:{{ item }}; docker build -t yadavashu/{{ job_name }}:{{ build_id }} /opt/.
       become: true
 
     - name: Run Docker container
-      shell: docker stop test-cont; docker rm test-cont; docker run -td --name test-cont -p 8080:8080 yadavashu/{{ job_name }}:{{ build_id }}
+      shell: docker run -td --name test-cont -p 8080:8080 yadavashu/{{ job_name }}:{{ build_id }}
       become: true
