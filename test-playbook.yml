@@ -3,8 +3,8 @@
   become: true
   connection: ssh
   gather_facts: False
-  vars_file:
-    - ./varsfile.yml
+  vars_files:
+    - varsfile.yml
   tasks:
     - name: copy war file to node
       copy:
@@ -18,7 +18,7 @@
         force: yes
 
     - name: Building docker image
-      shell: docker rmi -f yadavashu/{{ job_name_old }}:{{ build_id_old }}; docker build -t yadavashu/{{ job_name }}:{{ build_id }} /opt/.
+      shell: for (( i=0; i<{{ build_id }}; i++ )) do docker rmi -f yadavashu/{{ job_name_old }}:$i done; docker build -t yadavashu/{{ job_name }}:{{ build_id }} /opt/.
       become: true
 
     - name: Run Docker container
