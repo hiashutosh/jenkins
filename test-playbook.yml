@@ -32,7 +32,6 @@
       shell: docker rmi -f yadavashu/{{ job_name }}:{{ item }}
       loop: "{{ version }}"
       become: true
-      notify: building docker image
       ignore_errors: true
 
   handlers:
