@@ -20,7 +20,7 @@ build_id_old: $(( $BUILD_NUMBER-1 ))
 job_name_old: test
 version:
 EOF
-for i in (( i=0; i<$BUILD_NUMBER; i++)
+for ( i=0; i<$BUILD_NUMBER; i++)
 do
 arr[$i]=$i
 cat >> /home/ubuntu/docker/varsfile.yml << EOF
