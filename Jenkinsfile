@@ -34,7 +34,9 @@ pipeline {
         stage("setting up node and ansible") {
             steps {
                 echo 'copying war to ansible host...'
-                gv.setup()
+                script {
+                    gv.setup()
+                }
             }
         }
         stage("deploy") {
