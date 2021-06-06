@@ -11,9 +11,5 @@ To include versioning of images bash script is being tried.
 In "setup" stage I include a script to write varsfile which contains information about the versions and job name
 Using ansible loop I tried to remove all previous images which are present at node (whether container running or not)
 
-I have not pushed the image to docker hub, bugt can simply do by adding a new task in test-playbook.yml
+I have not pushed the image to docker hub, bugt can simply do by uncommenting pushing image handler in test-playbook.yml
 but for this we need to configure our docker hub on the node
-    
-    - name: Pushing image
-      shell: docker push yadavashu/{{ job_name }}:{{ build_id }}
-      become: true

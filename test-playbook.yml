@@ -33,11 +33,16 @@
     - name: building docker image
       shell: docker build -t yadavashu/{{ job_name }}:{{ build_id }} /opt/.
       become: true
-      notify: run_container
+      notify: 
+        - run_container
+#        - pushing image
       
     - name: run_container
       shell: docker run --restart=always -td --name test-cont -p 8080:8080 yadavashu/{{ job_name }}:{{ build_id }}
       become: true
-      
+#
+#    - name: pushing image
+#      shell: docker push yadavashu/{{ job_name }}:{{ build_id }}
+#      become: true  
 
       
