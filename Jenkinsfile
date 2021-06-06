@@ -12,7 +12,6 @@ pipeline {
                 script {
                     gv = load "pipeline.groovy"
                     git 'https://github.com/hiashutosh/webapp.git'
-                   
                 }
             }
         }
@@ -20,36 +19,31 @@ pipeline {
         stage("build-jar") {
             steps {
                 echo 'building the application....'
-                
                 script {
-                    
                     gv.buildjar()
                }
             }
         }
+
         stage("test") {
             steps {
                 echo 'testing the application.....'
-                echo 'copying war to ansible host...'
-             
+
             }
         }
-        
-        stage("deploy") {
-
+        stage("setting up node and ansible") {
             steps {
-                
-                             
+                echo 'copying war to ansible host...'
+                gv.setup()
+            }
+        }
+        stage("deploy") {
+            steps {
                 script {
-                    echo 'Building docker image...'
-                    gv.buildimage()
-                    echo 'deploying docker image....'
+                    echo 'Building docker image and deploying contianer...'
                     gv.deploy()
                 }
-            
             }
-            
         }
     }
-
 }
