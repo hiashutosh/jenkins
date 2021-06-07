@@ -34,8 +34,8 @@ done
     wget https://raw.githubusercontent.com/hiashutosh/jenkins/version-deploy/Dockerfile ; 
     wget https://raw.githubusercontent.com/hiashutosh/jenkins/version-deploy/setup.yml; 
     wget https://raw.githubusercontent.com/hiashutosh/jenkins/version-deploy/test-playbook.yml ;
-    wget 
-    wget 
+    wget https://raw.githubusercontent.com/hiashutosh/jenkins/deploy-k8s/k8s-deploy.yml.j2
+    wget https://raw.githubusercontent.com/hiashutosh/jenkins/deploy-k8s/k8s-sevice.yml.j2
     ansible-playbook -i 192.168.132.146, setup.yml --extra-vars "ansible_password=ashu1234"
     ''')], verbose:true)])
 }
