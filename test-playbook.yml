@@ -3,6 +3,8 @@
   become: true
   connection: ssh
   gather_facts: False
+  vars_files:
+    - varsfile.yml
 
   tasks:
     - name: copy war file to node
@@ -10,16 +12,37 @@
         src: /home/ubuntu/docker/mvnwebapp.war
         dest: /opt/
         force: yes
+    
     - name: copy dockerfile
       copy:
         src: /home/ubuntu/docker/Dockerfile
         dest: /opt/
         force: yes
 
+    - name: copy k8s deployment
+      template:
+        src: /home/ubuntu/docker/k8s-deployment.yml.j2
+        dest: /opt/k8s-deployment.yml
+        force: yes
+
+    - name: copy k8s service
+      template:
+        src: /home/ubuntu/docker/k8s-service.yml.j2
+        dest: /opt/k8s-service.yml
+        force: yes
+
     - name: Building docker image
-      shell: docker rmi -f yadavashu/test_img; docker build -t yadavashu/test_img /opt/.
+      shell: docker rmi -f yadavashu/{{ job_name }}:{{ version }}; docker build -t yadavashu/test_img /opt/.
       become: true
 
-    - name: Run Docker container
-      shell: docker stop test-cont; docker rm test-cont; docker run -td --name test-cont -p 8080:8080 yadavashu/test_img
-      become: true
+    - name: create deployment
+      command: kubectl appy -f k8s-deploy.yml
+    
+    - name: update deployment with new pods
+      command: kubectl rollout restart deployment.v1.apps/k8s-deployment
+
+
+
+#    - name: Run Docker container
+#      shell: docker stop test-cont; docker rm test-cont; docker run -td --name test-cont -p 8080:8080 yadavashu/test_img
+#      become: true

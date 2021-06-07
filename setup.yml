@@ -10,10 +10,11 @@
         name: docker.io
         state: latest
         update_cache: yes
+        enabled: true
 
     - name: start docker
       systemd:
         name: docker
-        state: started
+        state: restarted
     
     
